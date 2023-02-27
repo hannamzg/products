@@ -7,10 +7,8 @@ function SelectProducts(prop) {
     const [data,setData]=useState([]);
 
     useEffect(()=>{
-    
         try{
             selectProductByCategories(prop.selectedData).then((data)=>{
-            console.log(data);
               setData(data.data)   
                       
             }).catch((err)=>{

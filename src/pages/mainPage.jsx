@@ -27,7 +27,7 @@ function MainPage() {
   return (
     <div >
        <NavBar/>
-       <Filter data={data} setSelectedData={setSelectedData}/>
+       <Filter data={data} setSelectedData={setSelectedData} selectedData={selectedData}/>
        {selectedData ? <SelectProducts selectedData={selectedData} />: <Products data={data}/>}
     </div>
   );
