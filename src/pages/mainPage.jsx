@@ -4,10 +4,12 @@ import Products from "../components/products";
 import SelectProducts from "../components/selectProducts"
 import { useEffect,useState } from "react"
 import {getAllProducts} from '../serves/getAllProducts';
+import SignIn from "../components/signIn"
 
 function MainPage() {
   const [data,setData]=useState([]);
   const [selectedData,setSelectedData]=useState("")
+  const [openSignIn,setOpenSignIn]=useState(false)
 
   useEffect(()=>{
     
@@ -23,12 +25,13 @@ function MainPage() {
             console.log(err);
         }
   },[])
-
+  
   return (
     <div >
-       <NavBar/>
+       <NavBar setOpenSignIn={setOpenSignIn}/>
        <Filter data={data} setSelectedData={setSelectedData} selectedData={selectedData}/>
        {selectedData ? <SelectProducts selectedData={selectedData} />: <Products data={data}/>}
+      {openSignIn&&<SignIn setOpenSignIn={setOpenSignIn}/>}
     </div>
   );
 }

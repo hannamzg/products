@@ -1,7 +1,7 @@
 import navStyle from '../styles/nav.module.scss';
 
 
-function NavBar() {
+function NavBar(prop) {
     return (
       <div className={navStyle.nav}>
         <div className={navStyle.rightDiv}>
@@ -15,7 +15,7 @@ function NavBar() {
                 </div>
             </div>
             <div className={navStyle.signInUpDiv}>
-                 <p className={navStyle.signIn}>sign in</p>
+                 <p className={navStyle.signIn} onClick={()=>prop.setOpenSignIn(true)}>sign in</p>
                 <p className={navStyle.signUp}>sign Up</p>
             </div>
       </div>
