@@ -61,6 +61,47 @@
     right: 0;
 }
 
+.UserInfoDiv{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    cursor: pointer;
+}
+
+.UserImage{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.userName{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0 10px;
+}
+
+.divDown{
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    flex-direction: column;
+    padding: 0;
+}
+
+.liItem{
+    text-align: center;
+    width: 100%;
+    background-color: rgb(218, 64, 64);
+    padding: 6px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
 .signInUpDiv{
     display: flex;
     align-items: center;

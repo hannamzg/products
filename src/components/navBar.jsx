@@ -14,10 +14,20 @@ function NavBar(prop) {
                     <i className="bi bi-search"  id={navStyle.searchIcon}></i>
                 </div>
             </div>
-            <div className={navStyle.signInUpDiv}>
+           {prop.currentUser ?<div className={navStyle.UserInfoDiv}>
+                <i className="bi bi-arrow-down"></i>
+                <img src={"http://localhost:5000/"+prop.currentUser.photo} alt="" className={navStyle.UserImage} />
+                <h4 className={navStyle.userName}>{prop.currentUser.name}</h4>
+                <ul className={navStyle.divDown}>
+                    <li className={navStyle.liItem} onClick={()=>{
+                               
+                    }}>sign out</li>                            
+                </ul>
+            </div>:
+             <div className={navStyle.signInUpDiv}>
                  <p className={navStyle.signIn} onClick={()=>prop.setOpenSignIn(true)}>Sign in</p>
                 <p className={navStyle.signUp} onClick={()=>prop.setOpenSignUp(true)}>Sign Up</p>
-            </div>
+            </div> }
       </div>
     );
   }

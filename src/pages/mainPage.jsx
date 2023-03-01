@@ -12,6 +12,7 @@ function MainPage() {
   const [selectedData,setSelectedData]=useState("")
   const [openSignIn,setOpenSignIn]=useState(false)
   const [openSignUp,setOpenSignUp]=useState(false)
+  const [currentUser,setCurrentUser]=useState()
 
 
   useEffect(()=>{
@@ -31,10 +32,10 @@ function MainPage() {
   
   return (
     <div >
-      <NavBar setOpenSignIn={setOpenSignIn} setOpenSignUp={setOpenSignUp}/>
+      <NavBar setOpenSignIn={setOpenSignIn} setOpenSignUp={setOpenSignUp} currentUser={currentUser}/>
       <Filter data={data} setSelectedData={setSelectedData} selectedData={selectedData}/>
       {selectedData ? <SelectProducts selectedData={selectedData} />: <Products data={data}/>}
-      {openSignIn&&<SignIn setOpenSignIn={setOpenSignIn}/>}
+      {openSignIn&&<SignIn setOpenSignIn={setOpenSignIn} setCurrentUser={setCurrentUser} currentUser={currentUser}/>}
       {openSignUp&& <SignUp setOpenSignUp={setOpenSignUp} setOpenSignIn={setOpenSignIn}/>}
     </div>
   );

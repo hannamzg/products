@@ -2,15 +2,14 @@
 import singInStyle from "../styles/signIn.module.scss";
 import {login} from "../serves/login.js";
 import { useFormik } from "formik";
-//import { useState } from "react";
+import { useState,useEffect } from "react";
 
 function SignIn(prop){
-
-
 
   function onSubmit(){
     try{
       login(values).then((data)=>{
+        prop.setCurrentUser(data.data)
         console.log(data); 
       }).catch((err)=>{
         console.log(err);
@@ -18,10 +17,14 @@ function SignIn(prop){
     }
     catch(err){
       console.log(err);
-    }
-
-   
+    }   
   }
+
+  useEffect(() => {
+    console.log(prop.currentUser);
+    localStorage.setItem("UsersProduct", JSON.stringify(prop.currentUser));
+  }, [prop.currentUser]);  
+ 
   
   const {values,errors,touched,handleBlur,handleChange,handleSubmit}= useFormik({
     initialValues:{
