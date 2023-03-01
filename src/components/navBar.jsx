@@ -15,8 +15,8 @@ function NavBar(prop) {
                 </div>
             </div>
             <div className={navStyle.signInUpDiv}>
-                 <p className={navStyle.signIn} onClick={()=>prop.setOpenSignIn(true)}>sign in</p>
-                <p className={navStyle.signUp}>sign Up</p>
+                 <p className={navStyle.signIn} onClick={()=>prop.setOpenSignIn(true)}>Sign in</p>
+                <p className={navStyle.signUp} onClick={()=>prop.setOpenSignUp(true)}>Sign Up</p>
             </div>
       </div>
     );
