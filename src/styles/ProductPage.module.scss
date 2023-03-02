@@ -1,0 +1,51 @@
+.div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  width: 70%;
+  margin: 20px auto;
+}
+
+.nameTitle{
+  margin: 20px auto;
+}
+
+.image{
+    width: 400px;
+    margin: 10px auto;
+}
+
+.decripshin{
+    margin: 20px auto;
+    max-width: 1000px;
+    width: 60%;
+}
+
+.footer{
+  padding-top: 15px;
+  border-top: 1px solid black ;
+  display:flex;
+  justify-content:space-between;
+  width:80%;
+}
+
+.btn{
+  border: none;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3c096c;
+  color: white;
+  border-radius: 5px;
+}
+
+.iconAdd{
+  margin: 0 auto;
+}
+
+.AddTitle{
+  margin: 0 auto;
+}
