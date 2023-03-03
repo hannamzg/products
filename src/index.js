@@ -7,10 +7,11 @@ import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { AuthContextProvider } from "./context/authContext";
+import {AuthProducts} from "./context/productsManger"
 
 //  npm i react-router-dom
 //npm  i react-toastify
-
 //  npm install gh-pages --save-div  for githup
 //npm run deploy
 
@@ -18,7 +19,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>  
-      <App />
+      <AuthProducts>
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
+      </AuthProducts>
     </BrowserRouter>
   </React.StrictMode>
 );

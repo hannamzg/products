@@ -1,8 +1,11 @@
 import products from "../styles/Products.module.scss";
 import { useNavigate } from "react-router-dom";
+import {ProductsManger} from "../context/productsManger"
+import { useContext } from "react";
 
 function Products(prop) {
   const navigate = useNavigate();
+  const {setProduct} = useContext(ProductsManger)
 
   return (
     <div className={products.productsDiv}>
@@ -15,8 +18,9 @@ function Products(prop) {
                 src={"http://localhost:5000/" + data.photo}
                 alt=""
                 className={products.img}
-                onClick={()=> {prop.setSelectedProduct(data) 
-                  navigate('/product')
+                onClick={()=> {
+                  navigate(`/productPage/${data.id}`)
+                  setProduct(data)
                 }}
               />
                 <div className={products.productFooter}>

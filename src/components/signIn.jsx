@@ -1,15 +1,17 @@
 import singInStyle from "../styles/signIn.module.scss";
-import { login } from "../serves/login.js";
 import { useFormik } from "formik";
-import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import {AuthContext} from '../context/authContext';
+import { useContext } from "react";
 
 function SignIn(prop) {
-  function onSubmit() {
-    try {
-      login(values)
-        .then((data) => {
-          prop.confirmSignIn(data.data);
+  const { login } = useContext(AuthContext);
+
+ async function onSubmit() {
+ 
+    try { 
+    await login(values)
+          prop.setOpenSignIn(false)
           toast("welcome", {
             position: "top-right",
             autoClose: 2000,
@@ -19,8 +21,7 @@ function SignIn(prop) {
             draggable: true,
             progress: undefined,
             theme: "light",
-          });
-        })
+          })
         .catch((err) => {
           toast(err, {
             position: "top-right",

@@ -1,13 +1,26 @@
 import appStyle from "./styles/App.module.scss";
 import MainPage from "./pages/mainPage";
+import NavBar from "./components/navBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import ProductPage from "./pages/productPage"
+
 
 function App() {
+  const [openSettings,setOpenSettings]=useState(false);
+ 
+
+
   return (
-    <div className={appStyle.App}>
+    <div className={appStyle.App} onClick={()=> openSettings&&setOpenSettings(false)}>
+      <NavBar openSettings={openSettings} setOpenSettings={setOpenSettings}/>
       <ToastContainer />
-      <MainPage />
+      <Routes>
+        <Route path="/"element={ <MainPage /> }/>
+        <Route path="/productPage/:id"element={ <ProductPage /> }/>
+      </Routes>
     </div>
   );
 }
