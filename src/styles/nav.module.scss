@@ -133,9 +133,35 @@
 }
 
 #cartIcon{
-  margin-right: 15px;
-  font-size: 20px;
+  margin-right: 20px;
+  font-size: 30px;
 }
+
+.cartIconDiv{
+  position: relative; 
+  width: fit-content;
+}
+
+.ribbon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: red;
+ 
+}
+
+#countNumbers{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 
 @media only screen and (max-width: 600px) {
   #searchIcon {

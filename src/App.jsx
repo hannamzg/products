@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import ProductPage from "./pages/productPage"
-
+import Cart from './pages/cart'
 
 function App() {
   const [openSettings,setOpenSettings]=useState(false);
@@ -20,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/"element={ <MainPage /> }/>
         <Route path="/productPage/:id"element={ <ProductPage /> }/>
+        <Route path="/cart"element={ <Cart /> }/>
       </Routes>
     </div>
   );

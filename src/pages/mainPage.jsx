@@ -1,4 +1,3 @@
-import NavBar from "../components/navBar";
 import Filter from "../components/filter";
 import Products from "../components/products";
 import SelectProducts from "../components/selectProducts";

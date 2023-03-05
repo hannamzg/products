@@ -1,3 +1,8 @@
+.bigDiv{
+  min-height: 1000px;
+  background-color: #10002b;
+}
+
 .div {
   display: flex;
   justify-content: center;
@@ -29,6 +34,7 @@
   display:flex;
   justify-content:space-between;
   width:80%;
+  margin: 20px auto;
 }
 
 .btn{
@@ -41,6 +47,7 @@
   color: white;
   border-radius: 5px;
 }
+
 
 .iconAdd{
   margin: 0 auto;
@@ -61,3 +68,24 @@
 }
 @keyframes s3 {to{transform: rotate(1turn)}}
 
+
+
+@media only screen and (max-width: 600px) {
+  
+  .image{
+    width: 200px;
+    margin: 10px auto;
+  }
+    
+  .btn{
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3c096c;
+    color: white;
+    border-radius: 5px;
+  }
+
+}

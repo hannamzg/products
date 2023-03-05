@@ -4,12 +4,16 @@ import SignIn from "../components/signIn";
 import SignUp from "../components/signUp";
 import {AuthContext} from '../context/authContext';
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function NavBar(prop) {
   const [openSignIn, setOpenSignIn] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
   const {currentUser} =useContext(AuthContext);
   const {logOut } =useContext(AuthContext);
+  const navigate = useNavigate();
+
   
   useEffect(()=>{
 },[currentUser])
@@ -40,7 +44,11 @@ function NavBar(prop) {
             className={navStyle.UserImage}
             onClick={() => prop.setOpenSettings(true)}
           />
-          <i className="bi bi-cart3" id={navStyle.cartIcon}></i>
+          <div className={navStyle.cartIconDiv} onClick={()=> navigate("/cart")}>
+              <i className="bi bi-cart3" id={navStyle.cartIcon}></i>
+              <div className={navStyle.ribbon}><span id={navStyle.countNumbers}>8</span></div>
+          </div>
+        
           {prop.openSettings && (
             <ul className={navStyle.divDown}>
               <li
