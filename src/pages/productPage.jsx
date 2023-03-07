@@ -5,10 +5,13 @@ import { useParams } from "react-router-dom";
 import {AddToCart} from "../serves/addToCart";
 import { useContext } from "react";
 import {AuthContext} from '../context/authContext';
+import{ProductsManger} from '../context/productsManger'
+import { toast } from "react-toastify";
 
 function ProductPage() {
   const [seletedProduct,setSeletedProduct]=useState();
   const {currentUser } =useContext(AuthContext);
+  const {setAddToCartInfoChange } =useContext(ProductsManger);
   const { id } = useParams();
 
   useEffect(()=>{    
@@ -27,17 +30,47 @@ function ProductPage() {
   function handleClickAddToCart(productId) {
     try{
       AddToCart(currentUser.id,productId).then((data)=>{
-        console.log(data);
+      setAddToCartInfoChange(true)
+      toast(data.data, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
      }).catch((err)=>{
-        console.log(err);
+      toast(err.response.data
+        , {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
      })
     }
     catch(err){
-      console.log(err);
+      toast(err.response.data, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     
   }
- 
+
+  
     
  if (seletedProduct) {
   return (

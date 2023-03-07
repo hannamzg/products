@@ -5,17 +5,21 @@ import { useNavigate } from "react-router-dom";
 import {AuthContext} from '../context/authContext';
 import {AddToCart} from "../serves/addToCart";
 import { useContext } from "react";
+import{ProductsManger} from '../context/productsManger'
+import { toast } from "react-toastify";
 
 
 function SelectProducts(prop) {
   const [data, setData] = useState([]);
   const {currentUser } =useContext(AuthContext);
   const navigate = useNavigate();
+  const {setAddToCartInfoChange } =useContext(ProductsManger);
 
   useEffect(() => {
     try {
       selectProductByCategories(prop.selectedData)
         .then((data) => {
+          
           setData(data.data);
         })
         .catch((err) => {
@@ -30,13 +34,43 @@ function SelectProducts(prop) {
   function handleClickAddToCart(productId) {
     try{
       AddToCart(currentUser.id,productId).then((data)=>{
-        console.log(data);
+        setAddToCartInfoChange(true)
+        toast(data.data, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
      }).catch((err)=>{
-        console.log(err);
+      toast(err.response.data
+        , {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
      })
     }
     catch(err){
-      console.log(err);
+      toast(err.message
+        , {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     
   }

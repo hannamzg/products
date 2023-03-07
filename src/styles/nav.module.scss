@@ -147,10 +147,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 0;
+  top: -8px;
   right: 10px;
-  width: 18px;
-  height: 18px;
+  width: 23px;
+  height: 23px;
   border-radius: 50%;
   background-color: red;
  
@@ -159,7 +159,7 @@
 #countNumbers{
   white-space: nowrap; 
   overflow: hidden;
-  text-overflow: ellipsis;
+  //text-overflow: ellipsis;
 }
 
 

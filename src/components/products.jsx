@@ -1,25 +1,55 @@
 import products from "../styles/Products.module.scss";
 import { useNavigate } from "react-router-dom";
-import {ProductsManger} from "../context/productsManger"
 import { useContext } from "react";
+import{ProductsManger} from '../context/productsManger'
 import {AuthContext} from '../context/authContext';
 import {AddToCart} from "../serves/addToCart";
+import { toast } from "react-toastify";
 
 function Products(prop) {
   const navigate = useNavigate();
-  const {setProduct} = useContext(ProductsManger)
   const {currentUser } =useContext(AuthContext);
+  const {setAddToCartInfoChange } =useContext(ProductsManger);
 
   function handleClickAddToCart(productId) {
     try{
       AddToCart(currentUser.id,productId).then((data)=>{
-        console.log(data);
+        setAddToCartInfoChange(true)
+        toast(data.data, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
      }).catch((err)=>{
-        console.log(err);
+      toast(err.response.data, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
      })
     }
     catch(err){
-      console.log(err);
+        console.log(err);
+      toast(err.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
     
   }
@@ -37,7 +67,7 @@ function Products(prop) {
                 className={products.img}
                 onClick={()=> {
                   navigate(`/productPage/${data.id}`)
-                  setProduct(data)
+                 
                 }}
               />
                 <div className={products.productFooter}>
