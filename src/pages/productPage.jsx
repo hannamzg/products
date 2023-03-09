@@ -25,7 +25,7 @@ function ProductPage() {
     catch(err){
       console.log(err);
     } 
-  },[])
+  },[id])
 
   function handleClickAddToCart(productId) {
     try{

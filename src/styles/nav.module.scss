@@ -163,6 +163,46 @@
 }
 
 
+.divSearchInputWithResult{
+  position: relative;
+}
+
+.InputResultUl{
+  position: absolute;
+  list-style: none;
+  width: 100%;
+  background-color: #3c096c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  z-index: 100;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.InputResultLi{
+  color: white;
+  margin: 4px auto;
+  padding: 4px;
+  width: 100%;
+  border-bottom: 1px white solid;
+  cursor: pointer;
+  
+}
+
+.InputResultLi:hover{
+  text-decoration: none;
+  transition: all 1s;
+  background-color: white;
+  color: #3c096c;
+  margin: 4px auto;
+  padding: 4px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
 @media only screen and (max-width: 600px) {
   #searchIcon {
     width: 25px;

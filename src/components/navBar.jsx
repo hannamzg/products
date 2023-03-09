@@ -7,13 +7,16 @@ import { useContext } from "react";
 import{ProductsManger} from '../context/productsManger'
 import { useNavigate } from "react-router-dom";
 import {getCartProducts} from '../serves/getCartProducts'
-
+import {searchInput} from '../serves/searchInput'
+import {  NavLink } from "react-router-dom";
 
 
 function NavBar(prop) {
   const {setAddToCartInfoChange, addToCartInfoChange} =useContext(ProductsManger);
   const [openSignIn, setOpenSignIn] = useState(false);
   const [openSignUp, setOpenSignUp] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResult,setSearchResult]=useState()
   const [cartInfo, setCartInfo] = useState();
   const {currentUser} =useContext(AuthContext);
   const {logOut } =useContext(AuthContext);
@@ -36,20 +39,47 @@ useEffect(()=>{
 },[currentUser,addToCartInfoChange])
 
 
+function handleInputChange(event) {
+  handleSearch(event.target.value)
+  setSearchQuery(event.target.value)
+}
+
+function handleSearch(searchQuery) {
+  try{
+    searchInput(searchQuery).then((data)=>{
+      setSearchResult(data)
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+  catch(err){
+    console.log(err);
+  } 
+}
+
   return (
     <div className={navStyle.nav}>
       <div className={navStyle.rightDiv}>
         <h2 className={navStyle.rightIcons}>product</h2>
         <i className="bi bi-amd" id={navStyle.icon}></i>
       </div>
-      <div>
+      <div className={navStyle.divSearchInputWithResult}>
         <div className={navStyle.divSearchInput}>
           <input
             type="text"
             className={navStyle.searchInput}
             placeholder="search"
-          />
+            name="searchQuery" value={searchQuery} onChange={handleInputChange}             />
           <i className="bi bi-search" id={navStyle.searchIcon}></i>
+        </div>
+        <div className={navStyle.InputResultUl}>{
+         searchResult&& searchQuery !==""&&  searchResult.data.map((data)=>{
+            return <NavLink  to={`/productPage/${data.id}`} style={{textDecoration:"none"}} onClick={()=>setSearchResult("")}><div className={navStyle.InputResultLi} key={data.id}>
+              {data.name}
+            </div>
+            </NavLink>
+          })
+        }
         </div>
       </div>
       {currentUser ? (

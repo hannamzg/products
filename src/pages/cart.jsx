@@ -89,6 +89,8 @@ function Cart() {
       </div>
       <div className={cartStyle.DivToBuy}>
         <h4>full price :{fullPrice} </h4>
+        <button type="button" class="btn btn-primary">buy</button>
+
        
       </div>
   </div> 
