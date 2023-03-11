@@ -70,13 +70,14 @@ function Products(prop) {
                  
                 }}
               />
+                
                 <div className={products.productFooter}>
                   <h5>{"₪" + data.price}</h5>
                   <div className={products.AddToCart} onClick={()=>handleClickAddToCart(data.id)}>
                       <i className="bi bi-cart-plus-fill" ></i>
                       <h6 className={products.addToCartH6}>Add To Cart</h6>
-                  </div>
-              </div>
+                  </div> 
+                </div>               
              {/*  <div class={products.ribbon }><span>sale</span></div> */}
             </div>
             

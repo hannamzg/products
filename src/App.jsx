@@ -11,18 +11,18 @@ import Cart from './pages/cart'
 function App() {
   const [openSettings,setOpenSettings]=useState(false);
  
-
-
   return (
     <div className={appStyle.App} onClick={()=> openSettings&&setOpenSettings(false)}>
-      <NavBar openSettings={openSettings} setOpenSettings={setOpenSettings}/>
+      
+    <NavBar openSettings={openSettings} setOpenSettings={setOpenSettings}/>
       <ToastContainer />
       <Routes>
         <Route path="/"element={ <MainPage /> }/>
         <Route path="/productPage/:id"element={ <ProductPage /> }/>
         <Route path="/cart"element={ <Cart /> }/>
-      </Routes>
+      </Routes>   
     </div>
+
   );
 }
 

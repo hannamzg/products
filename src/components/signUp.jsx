@@ -66,8 +66,8 @@ function SignUp(prop) {
     });
 
   return (
-    <div className={singUpStyle.mainDiv}>
-      <form className={singUpStyle.fromDiv}>
+    <div className={singUpStyle.mainDiv} onClick={() => prop.setOpenSignUp(false)}>
+      <form className={singUpStyle.fromDiv} onClick={(e) => e.stopPropagation()}>
         <div
           className={singUpStyle.closedBtn}
           onClick={() => prop.setOpenSignUp(false)}

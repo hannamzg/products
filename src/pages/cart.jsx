@@ -87,12 +87,11 @@ function Cart() {
         <div className={cartStyle.customLoader}></div>
         </>}
       </div>
-      <div className={cartStyle.DivToBuy}>
+     {products&&products.data.length !== 0&& <div className={cartStyle.DivToBuy}>
         <h4>full price :{fullPrice} </h4>
         <button type="button" class="btn btn-primary">buy</button>
-
-       
-      </div>
+        
+      </div>}
   </div> 
   );
 }

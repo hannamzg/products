@@ -25,17 +25,20 @@ function NavBar(prop) {
 
   
 useEffect(()=>{
-  try{
-    getCartProducts(currentUser.id).then((data)=>{
+  if (currentUser) {
+    try{
+      getCartProducts(currentUser.id).then((data)=>{
       setAddToCartInfoChange(false)
       setCartInfo(data.data.length);
     }).catch((err)=>{
-      console.log(err);
+        console.log(err);
     })
+    }
+    catch(err){
+      console.log(err);
+    } 
   }
-  catch(err){
-    console.log(err);
-  } 
+
 },[currentUser,addToCartInfoChange])
 
 
@@ -57,10 +60,10 @@ function handleSearch(searchQuery) {
   } 
 }
 
-  return (
-    <div className={navStyle.nav}>
+return (
+    <div className={navStyle.nav} >
       <div className={navStyle.rightDiv}>
-        <h2 className={navStyle.rightIcons}>product</h2>
+        <h2 className={navStyle.rightIcons} >product</h2>
         <i className="bi bi-amd" id={navStyle.icon}></i>
       </div>
       <div className={navStyle.divSearchInputWithResult}>
@@ -69,7 +72,7 @@ function handleSearch(searchQuery) {
             type="text"
             className={navStyle.searchInput}
             placeholder="search"
-            name="searchQuery" value={searchQuery} onChange={handleInputChange}             />
+            name="searchQuery" value={searchQuery} onChange={handleInputChange}/>
           <i className="bi bi-search" id={navStyle.searchIcon}></i>
         </div>
         <div className={navStyle.InputResultUl}>{
@@ -83,7 +86,7 @@ function handleSearch(searchQuery) {
         </div>
       </div>
       {currentUser ? (
-        <div className={navStyle.UserInfoDiv}>
+        <div className={navStyle.UserInfoDiv} >
           <i className="bi bi-arrow-down" style={{ marginRight: "10px" }}></i>
           <img
             src={"http://localhost:5000/" + currentUser.photo}
@@ -93,7 +96,7 @@ function handleSearch(searchQuery) {
           />
           <div className={navStyle.cartIconDiv} onClick={()=> navigate("/cart")}>
               <i className="bi bi-cart3" id={navStyle.cartIcon}></i>
-              <div className={navStyle.ribbon}><span id={navStyle.countNumbers}>{cartInfo>9?"9+":cartInfo}</span></div>
+              {cartInfo>0&&<div className={navStyle.ribbon}><span id={navStyle.countNumbers}>{cartInfo>9?"9+":cartInfo}</span></div>}
           </div>
         
           {prop.openSettings && (
@@ -126,7 +129,7 @@ function handleSearch(searchQuery) {
         </div>
       )}
       
-      {openSignIn&& <SignIn  setOpenSignIn={setOpenSignIn}/>}
+      {openSignIn&& <SignIn  setOpenSignIn={setOpenSignIn} />}
       {openSignUp&&<SignUp setOpenSignUp={setOpenSignUp} setOpenSignIn={setOpenSignIn}/>}
 
 

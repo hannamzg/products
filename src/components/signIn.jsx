@@ -8,8 +8,7 @@ function SignIn(prop) {
   const { login } = useContext(AuthContext);
 
  async function onSubmit() {
- 
-    try { 
+  try { 
     await login(values)
           prop.setOpenSignIn(false)
           toast("welcome", {
@@ -56,11 +55,11 @@ function SignIn(prop) {
       },
       // validationSchema:basicSchema,
       onSubmit,
-    });
+  });
 
   return (
-    <div className={singInStyle.mainDiv}>
-      <form className={singInStyle.fromDiv}>
+    <div className={singInStyle.mainDiv}   onClick={() => prop.setOpenSignIn(false)}>
+      <form className={singInStyle.fromDiv} onClick={(e) => e.stopPropagation()}>
         <div
           className={singInStyle.closedBtn}
           onClick={() => prop.setOpenSignIn(false)}
