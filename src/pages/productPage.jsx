@@ -8,12 +8,18 @@ import {AuthContext} from '../context/authContext';
 import{ProductsManger} from '../context/productsManger'
 import { toast } from "react-toastify";
 import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
+import {addRating}from '../serves/addRating';
+import {getTheRate}from '../serves/getTheRate'
 
 function ProductPage() {
   const [seletedProduct,setSeletedProduct]=useState();
+  const [openRateing,setOpenRateing]=useState(false);
   const {currentUser } =useContext(AuthContext);
   const {setAddToCartInfoChange } =useContext(ProductsManger);
-  const [rating, setRating] = useState(2);
+  const [rating, setRating] = useState(0);
+  const [TheRate,setTheRate]=useState(0);
+  const [hasBeenRate,setHasBeenRated]=useState(false);
   const { id } = useParams();
 
   useEffect(()=>{    
@@ -27,7 +33,32 @@ function ProductPage() {
     catch(err){
       console.log(err);
     } 
+
+    try{
+      getTheRate(id).then((data)=>{
+        handleTheRateOfProduct(data.data)
+        for (let i=0; i<data.length;i++) {
+          console.log(data[i]);
+        }
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
+    catch(err){
+      console.log(err);
+    } 
   },[id])
+
+
+  function handleTheRateOfProduct(TheRate) {
+    let count =0;
+    for (let rate in TheRate) {
+      let toNum=Number(rate);
+      count+=toNum
+    }
+
+    setTheRate(count/TheRate.length);
+  }
 
   function handleClickAddToCart(productId) {
     try{
@@ -73,24 +104,81 @@ function ProductPage() {
   }
 
   
+  function handleRatingChange( newValue) {
+    setRating(newValue.target.value);
+  }
 
-  function handleRatingChange(event, newValue) {
-    setRating(newValue);
+  function handleTheRating(){
+    
+    try{
+      addRating(currentUser.id,seletedProduct.id,rating).then((data)=>{
+        setOpenRateing(false)
+        toast(data.data, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+     }).catch((err)=>{
+      toast("err", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+     })
+    }
+    catch(err){
+        console.log(err);
+      toast(err.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   }
 
     
   if (seletedProduct) {
   return (
-    <div  className={ProductPageStyle.bigDiv}> 
-        <div className={ProductPageStyle.yourRateDiv}>
-          <div className={ProductPageStyle.theRateDiv}>
-                  <Rating
-              name="product-rating"
-              value={rating}
-              onChange={handleRatingChange}
-            />
+    <div  className={ProductPageStyle.bigDiv} > 
+        {openRateing&&<div className={ProductPageStyle.yourRateDiv}onClick={()=>setOpenRateing(false)} >
+          <div className={ProductPageStyle.theRateDiv} onClick={(e) => e.stopPropagation()}>
+            <div className={ProductPageStyle.closeBtn} onClick={()=>setOpenRateing(false)}>
+              <i className="bi bi-x-lg"></i>
+            </div>
+            
+            <div className={ProductPageStyle.rateHeder}>
+              <i className="bi bi-star" id={ProductPageStyle.starIcon}></i> 
+              <p className={ProductPageStyle.RateThis}>rate this</p>
+              <p className={ProductPageStyle.nameOfProductRating}>{seletedProduct.name}</p>
+            </div>
+
+            <div className={ProductPageStyle.RateSubmit}>
+                <Rating
+                  name="product-rating"
+                  onChange={handleRatingChange}
+                  size="large"
+                />
+              <div className={ProductPageStyle.btnSubmit}>
+                <Button variant="contained" onClick={()=>handleTheRating()}>rate this</Button>
+              </div>
+            </div>
           </div>
-        </div>
+        </div>}
         <div className={ProductPageStyle.div}>
           <div>
             <img src={"http://localhost:5000/" +seletedProduct.photo}alt="" className={ProductPageStyle.image}/>
@@ -100,10 +188,11 @@ function ProductPage() {
               <p className={ProductPageStyle.decripshin}>{seletedProduct.description}</p> 
                 <div className={ProductPageStyle.ratingDiv}>
                   <div>
-                    7.5
+                    {TheRate}
+                    <i className="bi bi-star-fill" style={{marginLeft:"10px",fontSize:'15px'}}></i>
                   </div>
-                  <div>
-                    open the your rate
+                  <div onClick={()=>setOpenRateing(true)} style={{cursor:"pointer"}}>
+                    <i className="bi bi-star"></i>  rate
                   </div>
                 </div>
                 <div className={ProductPageStyle.footer}>
@@ -120,7 +209,7 @@ function ProductPage() {
 } 
 else{
   <div class={ProductPageStyle.loader}></div>
-} 
+}  
   
 
  

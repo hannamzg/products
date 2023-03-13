@@ -6,6 +6,7 @@ import {AuthContext} from '../context/authContext';
 import {AddToCart} from "../serves/addToCart";
 import { toast } from "react-toastify";
 
+
 function Products(prop) {
   const navigate = useNavigate();
   const {currentUser } =useContext(AuthContext);
@@ -54,6 +55,10 @@ function Products(prop) {
     
   }
 
+
+
+
+
   return (
     <div className={products.productsDiv}>
       {prop.data ? (
@@ -70,7 +75,6 @@ function Products(prop) {
                  
                 }}
               />
-                
                 <div className={products.productFooter}>
                   <h5>{"₪" + data.price}</h5>
                   <div className={products.AddToCart} onClick={()=>handleClickAddToCart(data.id)}>

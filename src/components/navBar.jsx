@@ -72,6 +72,7 @@ return (
             type="text"
             className={navStyle.searchInput}
             placeholder="search"
+            autoComplete="off"
             name="searchQuery" value={searchQuery} onChange={handleInputChange}/>
           <i className="bi bi-search" id={navStyle.searchIcon}></i>
         </div>
