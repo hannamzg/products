@@ -33,13 +33,13 @@ function ProductPage() {
     catch(err){
       console.log(err);
     } 
+  },[id])
 
+  useEffect(()=>{    
     try{
       getTheRate(id).then((data)=>{
-        handleTheRateOfProduct(data.data)
-        for (let i=0; i<data.length;i++) {
-          console.log(data[i]);
-        }
+        handleTheRateOfProduct(data)
+        checkIfYouRateThis(data)
       }).catch((err)=>{
         console.log(err);
       })
@@ -47,17 +47,25 @@ function ProductPage() {
     catch(err){
       console.log(err);
     } 
-  },[id])
+  },[hasBeenRate])
 
 
   function handleTheRateOfProduct(TheRate) {
     let count =0;
-    for (let rate in TheRate) {
-      let toNum=Number(rate);
+    console.log(hasBeenRate);
+    for (let i = 0; i < TheRate.data.length; i++) {
+      let toNum=Number(TheRate.data[i].theRating);
       count+=toNum
-    }
+     }
+    setTheRate(count?count/TheRate.data.length:0);
+  }
 
-    setTheRate(count/TheRate.length);
+  function checkIfYouRateThis(TheRate) {
+    for (let i = 0; i < TheRate.data.length; i++) {
+     if (TheRate.data[i].userId===currentUser.id) {
+      setHasBeenRated(true)
+     }
+    }
   }
 
   function handleClickAddToCart(productId) {
@@ -124,7 +132,7 @@ function ProductPage() {
           theme: "light",
         });
      }).catch((err)=>{
-      toast("err", {
+      toast(err, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -137,7 +145,7 @@ function ProductPage() {
      })
     }
     catch(err){
-        console.log(err);
+      console.log(err);
       toast(err.message, {
         position: "top-right",
         autoClose: 2000,
@@ -188,12 +196,12 @@ function ProductPage() {
               <p className={ProductPageStyle.decripshin}>{seletedProduct.description}</p> 
                 <div className={ProductPageStyle.ratingDiv}>
                   <div>
-                    {TheRate}
+                    {TheRate}/5
                     <i className="bi bi-star-fill" style={{marginLeft:"10px",fontSize:'15px'}}></i>
                   </div>
-                  <div onClick={()=>setOpenRateing(true)} style={{cursor:"pointer"}}>
+                 {hasBeenRate?"": <div onClick={()=>setOpenRateing(true)} style={{cursor:"pointer"}}>
                     <i className="bi bi-star"></i>  rate
-                  </div>
+                  </div>}
                 </div>
                 <div className={ProductPageStyle.footer}>
                   <h3>{"₪" +seletedProduct.price}</h3>

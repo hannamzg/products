@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 function SignUp(prop) {
   const [file, setFile] = useState(null);
   const handleOnChangeFile = (event) => {
+    console.log(event.target.files[0]);
     setFile(event.target.files[0]);
   };
 
